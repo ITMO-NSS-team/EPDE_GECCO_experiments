@@ -18,7 +18,6 @@ You can install EPDE directly from our github repo:
 
 import epde.interface.interface as epde_alg
 
-from epde.interface.equation_translator import CoefflessEquation
 from epde.interface.prepared_tokens import TrigonometricTokens, CacheStoredTokens
 
 import os
@@ -33,10 +32,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 # TODO^ caching of the pre-calculated derivatives
     
 def run_burg_eq_search(multiobjective_mode, derivs):
-    epde_search_obj = epde_alg.epde_search(multiobjective_mode=multiobjective_mode, use_solver=False, 
+    epde_search_obj = epde_alg.EpdeSearch(multiobjective_mode=multiobjective_mode, use_solver=False, 
                                            dimensionality=dimensionality, boundary=boundary, 
-                                           coordinate_tensors = grids, 
-                                           verbose_params = {'show_moeadd_epochs' : True})    
+                                           coordinate_tensors = grids)    
     epde_search_obj.set_preprocessor(default_preprocessor_type='poly', # use_smoothing = True
                                      preprocessor_kwargs={'use_smoothing' : False})
     popsize = 7
